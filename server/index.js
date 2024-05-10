@@ -6,18 +6,21 @@ const path = require('path');
 const session = require('express-session'); 
 const cookieParser = require('cookie-parser'); 
 const jwt = require('jsonwebtoken'); 
-const bcrypt = require('bcrypt'); 
+const bcrypt = require('bcrypt');
 
+require('dotenv').config()
 
 // here we declare all models
 const UserModel = require("./models/Rejister")
 const app = express();
 
-app.use(cors({
-  origin: [ 'http://localhost:3001', 'http://localhost:5173'],
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true
-}));
+// app.use(cors({
+//   origin: [ 'http://localhost:3001', 'http://localhost:5173'],
+//   methods: ["GET", "POST", "PUT", "DELETE"],
+//   credentials: true
+// }));
+
+app.use(cors())
 
 app.use(express.json());
 
@@ -55,6 +58,7 @@ app.post("/register", (req, res) => {
         })
         .catch(err => res.json(err));
 });
+
 
 // here we check our deta through get 
 app.get("/get_register", (req, res) => {
