@@ -6,6 +6,8 @@ import jsonData from './ss.js';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+const BACKEND_URL = import.meta.env.BACKEND_URL
+
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -56,7 +58,7 @@ const Login = () => {
       return;
     }
 
-    axios.post('http://localhost:3001/login', { email, password })
+    axios.post(BACKEND_URL + '/login', { email, password })
       .then((result) => {
         if (result.data.status === 'success') {
           toast.success('🎉 Login successful!', {

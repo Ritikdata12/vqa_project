@@ -6,6 +6,9 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import "./Register.css";
 
+const BACKEND_URL = import.meta.env.BACKEND_URL
+
+
 const Register = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -75,7 +78,7 @@ const Register = () => {
   
     // If all validations pass, proceed with form submission
     axios
-      .post('http://localhost:3001/register', { username, email, password, role })
+      .post(BACKEND_URL + '/register', { username, email, password, role })
       .then((res) => {
         console.log(res);
         if (role === 'as a visitor' || role === 'as a creator') {
