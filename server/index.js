@@ -14,11 +14,7 @@ require('dotenv').config()
 const UserModel = require("./models/Rejister")
 const app = express();
 
-// app.use(cors({
-//   origin: [ 'http://localhost:3001', 'http://localhost:5173'],
-//   methods: ["GET", "POST", "PUT", "DELETE"],
-//   credentials: true
-// }));
+
 
 app.use(cors())
 
@@ -32,7 +28,21 @@ app.use(session({
 
 app.use(cookieParser());
 
-mongoose.connect("mongodb+srv://admin:Qag27924@cluster0.atu83vq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0");
+// mongoose.connect("mongodb+srv://admin:Qag27924@cluster0.atu83vq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0");
+
+const username = encodeURIComponent("admin");
+const password = encodeURIComponent("Qag27924");
+
+console.log(username);
+console.log(password);
+
+mongoose.connect(
+    `mongodb+srv://${username}:${password}@cluster0.atu83vq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`,
+    {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    }
+);
 
 app.post("/register", (req, res) => {
     const {  username, email, password, role } = req.body;
